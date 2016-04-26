@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dudas</title>
+
+    <link href="/css/estilo.css" type="text/css" rel="stylesheet">
+    <script type="application/javascript" src="js/javascript.js"></script>
+
+
+</head>
+<body>
+<div class="cabecera">
+    Bienvenido a preguntas y respuestas
+</div>
+<div class="login">
+    {% if user %}
+        Hola {{user.nickname()}}! Desconectate <a href="/login">aqu&iacute;</a>
+    {% else %}
+        Logueate! <a href="/login">aqu&iacute;</a>
+    {% endif %}
+</div>
+{% block content %}
+{% endblock %}
+<div id="mensajeError">
+    Error
+</div>
+<!--Formulario para crear pregunta-->
+<div id="form-Pregunta" class="form-Pregunta">
+    <form id="formP" action="/crearPregunta" method="post" onsubmit="return enviar_pregunta()">
+        <h4>Formulario para crear pregunta</h4>
+        <div class="sep-form">
+            <label>Introduce t&iacute;tulo: </label>
+            <br>
+            <input type="text" name="tituloP" id="tituloP">
+        </div>
+        <div class="sep-form">
+            <label>Introduce texto: </label>
+            <br>
+            <textarea type="text" name="textoP" id="textoP"></textarea>
+        </div>
+        <div class="sep-form">
+            <label>Autor: </label>
+            <br>
+            {% if user %}
+            <input type="hidden" name="autorP" id="autorP" value="{{user.nickname()}}">
+            <div class="autor-lab">
+                {{user.nickname()}}
+            </div>
+            {% endif %}
+        </div>
+        <div class="botones-form">
+            <button type="reset" onclick="ocultar_preguntar()"> Cancelar</button>
+            <button type="submit"> Enviar</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

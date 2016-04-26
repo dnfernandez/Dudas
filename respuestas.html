@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="cuerpo" id="cuerpoR">
+    <div class="cabecera-sec">
+        <span class="tit-cabecera-sec">Pregunta y respuestas</span>
+        <div class="panel-accion">
+            {% if user %}
+            <button type="button" onclick="mostrar_responder()">Responder</button>
+            {% else %}
+            <button type="button" onclick="necesita_login()">Responder</button>
+            {% endif %}
+            <button onclick="window.location.href='/'" type="button">Volver</button>
+        </div>
+    </div>
+    <div class="contenedor">
+        <div class="preguntas">
+            {% for preg in pregunta %}
+            <div class="bloque-P">
+                <div class="titulo-P">
+                    <h3>{{preg.titulo}}</h3>
+                </div>
+                <div class="texto-P">
+                    {{preg.texto}}
+                </div>
+                <div class="pie-P">
+                            <span class="autor">
+                                Autor: {{preg.autor}}
+                            </span>
+                            <span class="fecha-P">
+                                Fecha: {{preg.fecha}}
+                            </span>
+                </div>
+                <div class="linea-fondo">
+
+                </div>
+            </div>
+            <div class="linea-fondo">
+
+            </div>
+            {% endfor %}
+        </div>
+        <div class="respuestas">
+            {% if respuestas.count()>0 %}
+            {% for respuesta in respuestas %}
+            <!--bucle-->
+            <div class="bloque-R">
+                <div class="texto-R">
+                    {{respuesta.texto}}
+                </div>
+                <div class="pie-R">
+                                <span class="autor">
+                                    Autor: {{respuesta.autor}}
+                                </span>
+                                <span class="fecha-R">
+                                    Fecha: {{respuesta.fecha}}
+                                </span>
+                </div>
+                <div class="linea-fondo">
+
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <!--hasta aqui-->
+        </div>
+    </div>
+</div>
+<!--Formulario para crear respuesta-->
+<div id="form-Respuesta" class="form-Respuesta">
+    <form id="formR" action="/crearRespuesta" method="post" onsubmit="return enviar_respuesta()">
+        <h4>Formulario para crear respuesta</h4>
+        <div class="sep-form">
+            <label>Introduce texto: </label>
+            <br>
+            <textarea type="text" name="textoR" id="textoR"></textarea>
+        </div>
+        <div class="sep-form">
+            <label>Autor: </label>
+            <br>
+            {% if user %}
+            <div class="autor-lab">
+                {{user.nickname()}}
+            </div>
+            <input type="hidden" name="autorR" id="autorR" value="{{user.nickname()}}">
+            {% endif %}
+        </div>
+        <input type="hidden" name="idPreg" value="{{idP}}">
+        <button type="reset" onclick="ocultar_responder()"> Cancelar</button>
+        <button type="submit"> Enviar</button>
+    </form>
+</div>
+{% endblock %}

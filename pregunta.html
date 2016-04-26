@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div class="cuerpo" id="cuerpoP">
+            <div class="cabecera-sec">
+                <span class="tit-cabecera-sec">Preguntas</span>
+                <div class="panel-accion">
+                    {% if user %}
+                        <button type="button" onclick="mostrar_preguntar()">Crear pregunta</button>
+                    {% else %}
+                        <button type="button" onclick="necesita_login()">Crear pregunta</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="contenedor">
+                <div class="preguntas">
+                    <!--Bucle-->
+                    {% for pregunta in listaPreguntas %}
+                    <div class="bloque-P">
+                        <div class="titulo-P">
+                            <a href="/verPregunta?id={{pregunta.idPregunta}}">
+                                {{pregunta.titulo}}
+                            </a>
+                        </div>
+                        <div class="pie-P">
+                            <span class="autor">
+                                Autor: {{pregunta.autor}}
+                            </span>
+                            <span class="fecha-P">
+                                Fecha: {{pregunta.fecha}}
+                            </span>
+                        </div>
+                        <div class="linea-fondo">
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- Hasta aqui-->
+                </div>
+            </div>
+        </div>
+    {% endblock %}
