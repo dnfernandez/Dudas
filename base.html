@@ -1,59 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>Dudas</title>
 
-    <link href="/css/estilo.css" type="text/css" rel="stylesheet">
-    <script type="application/javascript" src="js/javascript.js"></script>
+    <link href="css/alertify.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/clean-blog.css" rel="stylesheet">
 
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
 
 </head>
+
 <body>
-<div class="cabecera">
-    Bienvenido a preguntas y respuestas
-</div>
-<div class="login">
-    {% if user %}
-        Hola {{user.nickname()}}! Desconectate <a href="/login">aqu&iacute;</a>
-    {% else %}
-        Logueate! <a href="/login">aqu&iacute;</a>
-    {% endif %}
-</div>
+<header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <a href="/">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Dudas</h1>
+                        <hr class="small">
+                        <span class="subheading">T&uacute; pregunta, otro responde...</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</header>
 {% block content %}
 {% endblock %}
-<div id="mensajeError">
-    Error
-</div>
-<!--Formulario para crear pregunta-->
-<div id="form-Pregunta" class="form-Pregunta">
-    <form id="formP" action="/crearPregunta" method="post" onsubmit="return enviar_pregunta()">
-        <h4>Formulario para crear pregunta</h4>
-        <div class="sep-form">
-            <label>Introduce t&iacute;tulo: </label>
-            <br>
-            <input type="text" name="tituloP" id="tituloP">
-        </div>
-        <div class="sep-form">
-            <label>Introduce texto: </label>
-            <br>
-            <textarea type="text" name="textoP" id="textoP"></textarea>
-        </div>
-        <div class="sep-form">
-            <label>Autor: </label>
-            <br>
-            {% if user %}
-            <input type="hidden" name="autorP" id="autorP" value="{{user.nickname()}}">
-            <div class="autor-lab">
-                {{user.nickname()}}
+
+<div class="container">
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Aplici&oacute;ns con linguaxes de script</p>
+                    <p class="copyright text-muted copy">Copyright &copy; 2016</p>
+                </div>
             </div>
-            {% endif %}
         </div>
-        <div class="botones-form">
-            <button type="reset" onclick="ocultar_preguntar()"> Cancelar</button>
-            <button type="submit"> Enviar</button>
-        </div>
-    </form>
+    </footer>
 </div>
+
+
+<script type="text/javascript" src="js/alertify.min.js"></script>
+<script type="text/javascript" src="js/javascript.js"></script>
+
 </body>
+
 </html>

@@ -3,53 +3,46 @@
  */
 function mostrar_responder() {
     document.getElementById("form-Respuesta").style.display = "block";
-    document.getElementById("cuerpoR").style.display = "none";
+    document.getElementById("respuestas").style.display = "none";
 }
 
 function ocultar_responder() {
-    document.getElementById("cuerpoR").style.display = "block";
+    document.getElementById("respuestas").style.display = "block";
     document.getElementById("form-Respuesta").style.display = "none";
-    document.getElementById("mensajeError").style.display = "none";
 }
 
 function mostrar_preguntar() {
     document.getElementById("form-Pregunta").style.display = "block";
-    document.getElementById("cuerpoP").style.display = "none";
+    document.getElementById("preguntas").style.display = "none";
 }
 
 function ocultar_preguntar() {
-    document.getElementById("cuerpoP").style.display = "block";
+    document.getElementById("preguntas").style.display = "block";
     document.getElementById("form-Pregunta").style.display = "none";
-    document.getElementById("mensajeError").style.display = "none";
 }
 
 function enviar_pregunta() {
     var tit = document.getElementById("tituloP").value;
     var text = document.getElementById("textoP").value;
     var aut = document.getElementById("autorP").value;
-    var error = document.getElementById("mensajeError");
     var envio = true;
-    if (tit.length==0){
-        error.innerHTML = "El t&iacutetulo no puede estar vac&iacute;o";
-        error.style.display="block";
+    if (tit.length==0 ||  /^\s*$/.test(tit)){
+        alertify.error("El t&iacutetulo no puede estar vac&iacute;o");
         envio=false;
     }
 
-    if(text.length==0 && envio){
-        error.innerHTML = "El texto no puede estar vac&iacute;o";
-        error.style.display="block";
+    if(text.length==0 ||  /^\s*$/.test(text)){
+        alertify.error("El texto no puede estar vac&iacute;o");
         envio=false;
     }
 
-    if(aut.length==0 && envio){
-        error.innerHTML = "El autor no puede estar vac&iacute;o";
-        error.style.display="block";
+    if(aut.length==0 ||  /^\s*$/.test(aut)){
+        alertify.error("El autor no puede estar vac&iacute;o");
         envio=false;
     }
 
     if(envio){
-        error.style.display="none";
-        return true;
+        document.getElementById("formP").submit();
     }else{
         return false;
     }
@@ -58,31 +51,25 @@ function enviar_pregunta() {
 function enviar_respuesta() {
     var text = document.getElementById("textoR").value;
     var aut = document.getElementById("autorR").value;
-    var error = document.getElementById("mensajeError");
     var envio = true;
 
-    if(text.length==0){
-        error.innerHTML = "El texto no puede estar vac&iacute;o";
-        error.style.display="block";
+    if(text.length==0 ||  /^\s*$/.test(text)){
+         alertify.error("El texto no puede estar vac&iacute;o");
         envio=false;
     }
 
-    if(aut.length==0 && envio){
-        error.innerHTML = "El autor no puede estar vac&iacute;o";
-        error.style.display="block";
+    if(aut.length==0 ||  /^\s*$/.test(aut)){
+        alertify.error("El autor no puede estar vac&iacute;o");
         envio=false;
     }
 
     if(envio){
-        error.style.display="none";
-        return true;
+        document.getElementById("formR").submit();
     }else {
         return false;
     }
 }
 
 function necesita_login(){
-    var error = document.getElementById("mensajeError");
-    error.innerHTML = "Se necesita login para esta acci&oacuten";
-    error.style.display="block";
+    alertify.error("Se necesita login para realizar esta acci&oacute;n");
 }
